@@ -3,10 +3,12 @@
 namespace EspServer\WorkoutAutomaticGenerator\Command;
 
 
+use EspServer\Common\DDD\Command;
+use EspServer\Common\DDD\CommandHandler;
 use EspServer\Common\DDD\CommandResponse;
 use Ramsey\Uuid\Uuid;
 
-class GenerateWorkoutCommandHandler
+class GenerateWorkoutCommandHandler implements CommandHandler
 {
 
     public function __construct()
@@ -14,7 +16,7 @@ class GenerateWorkoutCommandHandler
     }
 
 
-    public function handle(GenerateWorkoutCommand $command) : CommandResponse
+    public function handle(Command $command) : CommandResponse
     {
         $id = Uuid::uuid4();
 
@@ -24,6 +26,11 @@ class GenerateWorkoutCommandHandler
         // TODO : générer et stocker la séance
 
 
-        return new CommandResponse($id);
+        return CommandResponse::withValue($id);
+    }
+    
+    public function listenTo(): string
+    {
+        return GenerateWorkoutCommand::class;
     }
 }

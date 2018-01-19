@@ -2,10 +2,12 @@
 
 namespace EspServer\ExercisesCatalog\Query;
 
+use EspServer\Common\DDD\Query;
+use EspServer\Common\DDD\QueryHandler;
 use EspServer\Common\DDD\QueryResponse;
 use EspServer\ExercisesCatalog\Domain\ExercisesRepository;
 
-class GetExercisesQueryHandler
+class GetExercisesQueryHandler implements QueryHandler
 {
 
     /** @var ExercisesRepository */
@@ -16,9 +18,15 @@ class GetExercisesQueryHandler
         $this->repository = $repository;
     }
 
-    public function handle(GetExercisesQuery $query) : QueryResponse
+    public function handle(Query $query) : QueryResponse
     {
         $exercises = $this->repository->getAll();
         return new QueryResponse($exercises);
+    }
+    
+    
+    public function listenTo(): string
+    {
+        return GetExercisesQuery::class;
     }
 }

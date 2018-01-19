@@ -3,12 +3,11 @@
 namespace EspServer\WorkoutAutomaticGenerator\Command;
 
 
-class GenerateWorkoutCommand
+use EspServer\Common\DDD\Command;
+
+class GenerateWorkoutCommand implements Command
 {
 
-    /**
-     * GenerateWorkoutCommand constructor.
-     */
     public function __construct()
     {
     }

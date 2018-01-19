@@ -3,7 +3,9 @@
 namespace EspServer\ExercisesCatalog\Query;
 
 
-class GetExercisesQuery
+use EspServer\Common\DDD\Query;
+
+class GetExercisesQuery implements Query
 {
 
     public function __construct()
